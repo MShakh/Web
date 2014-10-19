@@ -43,3 +43,8 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+
+# netbeans files
+build/
+nbproject/
