@@ -17,14 +17,9 @@ public class FileManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Searcher searcher = new Searcher();
+        searcher.init();
         
-        File docs = new File("documents/");
-        String[] files = docs.list();
-        
-        for (String f : files) {
-           System.out.println(f);
-        }
     }
     
 }

@@ -5,19 +5,20 @@
  */
 package filemanager;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  *
  * @author Support
  */
-public class Dictionary {
+public class Record {
+    private String docId;
     
-    private Map<String, List<Record>> dict;
+    private int count;
     
-    public Dictionary() {
-        dict = new HashMap<>();
+    public Record(String docId) {
+        this.docId = docId;
+        count = 0;
     }
+    
+    
+
 }
