@@ -7,6 +7,7 @@ package Searcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -71,9 +72,26 @@ public class Searcher {
     }
     
     public List<Record> search(String word){
-       return dict.search(word);
+        return dict.search(word);
     }
-
+    public List<String> intersect(List<Record> r1, List<Record> r2){
+        List<String> result = new ArrayList<String>();
+        int i = 0;
+        int j = 0;
+        while (i < r1.size() && j < r2.size()){            
+            String file1 = r1.get(i).getDocID();
+            String file2= r2.get(j).getDocID();
+            int isless = file1.compareTo(file2);
+            if (isless == 0){
+                result.add(file1);
+                i++;
+                j++;
+            } else if (isless < 0){
+              i++;  
+            } else j++;
+        }
+        return result;
+    } 
     public int size() {
        return dict.size();
     }

@@ -8,6 +8,7 @@ package Searcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +35,29 @@ public class Servlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter res = response.getWriter();
         String input = request.getParameter("input");
-        
-        List<Record> filenames = Searcher.getInstance().search(input);
-        
-        for(Record r:filenames){
-            res.println(r.getDocID());
-        }
-                
+        if (input != ""){
+            Searcher sear = Searcher.getInstance();
+            Scanner sc = new Scanner(input);
+            String firstword = sc.next();
+            List<Record> filenames1 = sear.search(firstword);
+            if(sc.hasNext()){
+                String secondword = sc.next();
+                List<Record> filenames2 = sear.search(secondword);
+                if(filenames1 == null || filenames2 == null ){
+                    res.println("This word does not exist in dictionary!");
+                return;
+                }
+                List<String> filenames = sear.intersect(filenames1, filenames2);
+                for(String r:filenames){
+                    res.println(r);
+                }
+            } else if(filenames1 != null){
+                for(Record r:filenames1){
+                res.println(r.getDocID());
+                }
+            } else 
+                res.println("This word does not exist in dictionary!");
+        } else 
+            res.println("Enter the word please!");           
     }
 }
