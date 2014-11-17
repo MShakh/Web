@@ -10,15 +10,25 @@ package filemanager;
  * @author Support
  */
 public class Record {
-    private String docId;
     
+    private String docId;
     private int count;
     
-    public Record(String docId) {
+    public Record(String docId, int count) {
         this.docId = docId;
-        count = 0;
+        this.count = count;
     }
     
+    @Override
+    public String toString(){
+        return (docId+count);
+    }
     
-
+    public String getDocID() {
+        return docId;
+    }
+    
+    public int getCount() {
+        return count;
+    }
 }
